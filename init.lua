@@ -65,6 +65,7 @@ end
 
 local date = {}
 
+--[[ FIXME: UNTESTED
 function date.getdate(str)
   local tm = ffi.new("struct tm")
   ffi.fill(tm, ffi.sizeof(tm))
@@ -94,6 +95,7 @@ function date.getdate(str)
 
   return struct_tm_to_lua(tm)
 end
+]]
 
 function date.strptime(str, fmt)
   local cstr = ffi.cast("const char *", str)
