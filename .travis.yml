@@ -1,0 +1,36 @@
+language: c
+
+sudo: false
+
+addons:
+  apt:
+    packages:
+      - luarocks
+
+env:
+  global:
+    - PATH="$HOME/.luarocks/bin:$HOME/.local/bin:$HOME/bin:$PATH"
+    - LUA_PATH="$HOME/.luarocks/share/lua/5.1/?.lua;;"
+
+cache:
+  apt: true
+  directories:
+    - $HOME/.luarocks
+
+before_install:
+  - luarocks --local install luacov-coveralls
+  - mkdir $HOME/bin
+  - pushd $HOME/bin
+  - curl -L https://github.com/luvit/lit/raw/master/get-lit.sh | sh
+  - lit make lit://luvit/luvit
+  - popd
+  - lit install
+
+script:
+  - ./tests/run.sh --coverage
+
+after_success:
+  - luacov-coveralls
+
+notifications:
+  email: true
