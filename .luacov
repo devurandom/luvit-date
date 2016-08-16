@@ -1,4 +1,17 @@
+local project_root = os.getenv("PROJECT_ROOT") or error("$PROJECT_ROOT not set!")
+local libs_dir = project_root .. "/libs/"
+
+local function escape_pattern(str)
+	return string.gsub(str, "%W", "%%%1")
+end
+
 return {
-	runreport = true,
-	include = {"/date$"},
+	include = {
+		escape_pattern(libs_dir) .. ".+",
+	},
+	coveralls = {
+		pathcorrect = {
+			{escape_pattern(libs_dir), "libs/"},
+		},
+	},
 }

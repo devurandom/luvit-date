@@ -27,10 +27,10 @@ before_install:
   - lit install
 
 script:
-  - ./tests/run.sh --coverage
+  - env PROJECT_ROOT="$PWD" ./tests/run.sh --coverage=report
 
 after_success:
-  - luacov-coveralls
+  - env PROJECT_ROOT="$PWD" luacov-coveralls --verbose
 
 notifications:
   email: true
