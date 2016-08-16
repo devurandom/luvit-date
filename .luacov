@@ -1,5 +1,4 @@
 return {
-	codefromstrings = true,
 	runreport = true,
 	include = {"/date$"},
 }
