@@ -1,19 +1,11 @@
 #!/bin/bash
 
-while [ $# -gt 0 ] ; do
-	case "$1" in
-		--coverage) coverage=true ;;
-		--coverage=*) coverage=${1##--coverage=} ;;
-		*) exit 1 ;;
-	esac
-	shift
-done
-
 scriptdir=$(cd $(dirname $0) && pwd)
 
 while [ $# -gt 0 ] ; do
 	case "$1" in
 		--coverage) coverage=true ;;
+		--coverage=*) coverage=${1##--coverage=} ;;
 		*) exit 1 ;;
 	esac
 	shift
