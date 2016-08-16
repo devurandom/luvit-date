@@ -1,16 +1,19 @@
 local project_root = os.getenv("PROJECT_ROOT") or error("$PROJECT_ROOT not set!")
 local libs_dir = project_root .. "/libs/"
 
+-- Escape all non-alnum characters
 local function escape_pattern(str)
 	return string.gsub(str, "%W", "%%%1")
 end
 
 return {
 	include = {
+		-- Prevent coverage reports of the tests or helper utilities
 		escape_pattern(libs_dir) .. ".+",
 	},
 	coveralls = {
 		pathcorrect = {
+			-- Luvit makes filenames of all chunks absolute, thus strip the prefix to allow Coveralls to find the file in the Git repo
 			{escape_pattern(libs_dir), "libs/"},
 		},
 	},
