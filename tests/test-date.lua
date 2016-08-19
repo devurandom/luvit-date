@@ -1,4 +1,4 @@
-local date = require("date")
+local date = require("../init")
 local deepEqual = require("deep-equal")
 
 require("tap")(function(test)
