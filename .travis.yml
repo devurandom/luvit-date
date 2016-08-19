@@ -31,6 +31,7 @@ script:
 
 after_success:
   - env PROJECT_ROOT="$PWD" luacov-coveralls --verbose
+  - test -n "${TRAVIS_TAG}" && lit publish
 
 notifications:
   email: true
